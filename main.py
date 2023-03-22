@@ -70,14 +70,12 @@ tfidf = TfidfVectorizer(stop_words='english')
 train_x_vector = tfidf.fit_transform(train_x)
 # also fit the test_x_vector
 test_x_vector = tfidf.transform(test_x)
-print(test_x_vector)
+# print(test_x_vector)
 
 # cv = CountVectorizer(stop_words='english')
 # train_x_vector = cv.fit_transform(train_x)
 # test_x_vector = cv.transform(test_x)
-print(pd.DataFrame.sparse.from_spmatrix(train_x_vector,
-                                        index=train_x.index,
-                                        columns=tfidf.get_feature_names_out()))
+# print(pd.DataFrame.sparse.from_spmatrix(train_x_vector, index=train_x.index, columns=tfidf.get_feature_names_out()))
 
 # MODEL SELECTION
 # #SVM
@@ -87,9 +85,9 @@ svc.fit(train_x_vector, train_y)
 # svc.predict(train_x_vector[0])
 
 # ##Testing
-print(svc.predict(tfidf.transform(['A good movie'])))
-print(svc.predict(tfidf.transform(['An excellent movie'])))
-print(svc.predict(tfidf.transform(['"I did not like this movie at all I gave this movie away"'])))
+#print(svc.predict(tfidf.transform(['A good movie'])))
+#print(svc.predict(tfidf.transform(['An excellent movie'])))
+# print(svc.predict(tfidf.transform(['"I did not like this movie at all I gave this movie away"'])))
 
 # #Decision Tree
 dec_tree = DecisionTreeClassifier()
@@ -129,6 +127,7 @@ print(classification_report(test_y,
 conf_mat = confusion_matrix(test_y,
                             svc.predict(test_x_vector),
                             labels=['positive', 'negative'])
+print("Confusion Matrix")
 print(conf_mat)
 
 # Specificity: the specificity gets the True Negatives / Total
